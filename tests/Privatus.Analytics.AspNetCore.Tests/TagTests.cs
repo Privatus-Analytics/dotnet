@@ -148,6 +148,31 @@ public sealed class TagTests
     }
 
     [Fact]
+    public void OffWithTheQueueStubPrintsOnlyTheStubWithTheNonce()
+    {
+        var options = Options(o =>
+        {
+            o.Enabled = false;
+            o.QueueStub = true;
+            o.PageProps = _ => throw new InvalidOperationException("must not run when the tag is off");
+        });
+
+        Assert.Equal(
+            PrivatusTag.QueueStub("n1"),
+            Render(options, new PrivatusTagOverrides { Nonce = "n1", Props = new { plan = "pro" } }, new DefaultHttpContext()));
+        Assert.StartsWith("<script nonce=\"n1\">window.privatus=", PrivatusTag.QueueStub("n1"));
+        Assert.Equal(PrivatusTag.QueueStub(), Render(Options(o => (o.Enabled, o.QueueStub) = (null, true)), environment: "Development"));
+    }
+
+    [Fact]
+    public void OffWithoutTheQueueStubPrintsNothing() =>
+        Assert.Equal(string.Empty, Render(Options(o => o.Enabled = false), new PrivatusTagOverrides { QueueStub = false, Nonce = "n1", Props = new { plan = "pro" } }));
+
+    [Fact]
+    public void NoSiteIdWithTheQueueStubPrintsOnlyTheStub() =>
+        Assert.Equal(PrivatusTag.QueueStub("n1"), Render(Options(o => (o.SiteId, o.QueueStub) = (null, true)), new PrivatusTagOverrides { Nonce = "n1", Props = new { plan = "pro" } }));
+
+    [Fact]
     public void QueueStubHelperWorksAlone() =>
         Assert.StartsWith("<script>window.privatus=", PrivatusTag.QueueStub());
 

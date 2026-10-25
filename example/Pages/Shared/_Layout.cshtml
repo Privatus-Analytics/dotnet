@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@(ViewData["Title"] ?? "Privatus conformance")</title>
+<privatus-analytics props="@(ViewData["Props"] ?? PageProps.Default())" queue-stub="true" />
+</head>
+<body>
+@RenderBody()
+</body>
+</html>

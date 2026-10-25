@@ -1,0 +1,9 @@
+@page "/nasty"
+@{
+    ViewData["Title"] = "Nasty";
+    var props = PageProps.Default();
+    props["nasty"] = PageProps.Nasty;
+    ViewData["Props"] = props;
+}
+<h1>Nasty values</h1>
+<button type="button" privatus-event="Nasty value" privatus-prop-nasty="@PageProps.Nasty">Nasty</button>

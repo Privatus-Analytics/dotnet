@@ -54,7 +54,9 @@ public static class PrivatusTag
 
     /// <summary>
     /// Renders the tag (and the queue stub and page props script when used).
-    /// Returns an empty string without a site id or when the tag is off.
+    /// When the tag is off (no site id, or not enabled) it prints only the queue
+    /// stub when that is on, so privatus.track calls never fail, and otherwise an
+    /// empty string. The page props function is not called then.
     /// </summary>
     /// <param name="options">The settings.</param>
     /// <param name="environmentName">The host environment name, for example Production.</param>
@@ -65,16 +67,17 @@ public static class PrivatusTag
         ArgumentNullException.ThrowIfNull(options);
 
         var siteId = ResolveSiteId(options, overrides);
+        var queueStub = overrides?.QueueStub ?? options.QueueStub;
+        var nonce = ResolveNonce(options, overrides, httpContext);
         if (siteId is null || !IsEnabled(options, environmentName, overrides))
         {
-            return string.Empty;
+            return queueStub ? QueueStub(nonce) : string.Empty;
         }
 
-        var nonce = ResolveNonce(options, overrides, httpContext);
         var nonceAttribute = nonce is null ? string.Empty : $" nonce=\"{Text.Escape(nonce)}\"";
         var parts = new List<string>(3);
 
-        if (overrides?.QueueStub ?? options.QueueStub)
+        if (queueStub)
         {
             parts.Add($"<script{nonceAttribute}>{QueueStubScript}</script>");
         }

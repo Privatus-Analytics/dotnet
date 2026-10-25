@@ -12,8 +12,8 @@ namespace Privatus.Analytics.TagHelpers;
 /// <summary>
 /// Prints the Privatus Analytics script tag. Put it in the head of your layout:
 /// <c>&lt;privatus-analytics /&gt;</c>. Any data- attribute you add is passed to
-/// the script tag. Prints nothing without a site id or
-/// when the tag is off.
+/// the script tag. Without a site id or when the tag is off it prints only
+/// the queue stub (when on), or nothing.
 /// </summary>
 [HtmlTargetElement("privatus-analytics", TagStructure = TagStructure.WithoutEndTag)]
 public sealed class PrivatusAnalyticsTagHelper : TagHelper

@@ -37,7 +37,7 @@ public sealed class PrivatusAnalyticsService
     /// <summary>Whether a tag would print: there is a site id and the tag is on.</summary>
     public bool ShouldRender(PrivatusTagOverrides? overrides = null) => PrivatusTag.ShouldRender(Options, EnvironmentName, overrides);
 
-    /// <summary>The tag as a string. Empty without a site id or when the tag is off.</summary>
+    /// <summary>The tag as a string. When the tag is off it is only the queue stub (when on), or empty.</summary>
     public string Render(HttpContext? httpContext, PrivatusTagOverrides? overrides = null) =>
         PrivatusTag.Render(Options, EnvironmentName, overrides, httpContext);
 

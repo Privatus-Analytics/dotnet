@@ -1,0 +1,10 @@
+@page "/event"
+@{
+    ViewData["Title"] = "Events";
+}
+<h1>Events</h1>
+<button type="button" privatus-event="Report exported" privatus-prop-format="csv" privatus-prop-source="toolbar">Export report</button>
+<p><a href="#pricing" privatus-click="pricing.cta">Pricing</a></p>
+<form action="/event" method="get" privatus-event="Signup form">
+  <button type="submit">Sign up</button>
+</form>

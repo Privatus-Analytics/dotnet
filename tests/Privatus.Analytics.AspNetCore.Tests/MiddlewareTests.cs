@@ -81,6 +81,15 @@ public sealed class MiddlewareTests
     }
 
     [Fact]
+    public async Task AddsNothingWhenTheTagIsOffEvenWithTheQueueStub()
+    {
+        var (app, client) = await Start(Html(Page), o => (o.Enabled, o.QueueStub) = (false, true));
+        await using var _ = app;
+
+        Assert.Equal(Page, await client.GetStringAsync("/"));
+    }
+
+    [Fact]
     public async Task LeavesJsonAlone()
     {
         var (app, client) = await Start(Html(Page, "application/json"));

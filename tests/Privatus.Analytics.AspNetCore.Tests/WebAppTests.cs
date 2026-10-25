@@ -147,12 +147,13 @@ public sealed class WebAppTests : IClassFixture<WebApplicationFactory<Program>>
     }
 
     [Fact]
-    public async Task TheBlazorComponentPrintsNothingInDevelopment()
+    public async Task TheBlazorComponentPrintsOnlyTheQueueStubInDevelopment()
     {
         var body = await Client("Development").GetStringAsync("/blazor");
 
         Assert.DoesNotContain("pa.js", body);
-        Assert.DoesNotContain("window.privatus", body);
+        Assert.DoesNotContain("privatusPageProps", body);
+        Assert.Contains(PrivatusTag.QueueStub(), body);
     }
 
     [Fact]

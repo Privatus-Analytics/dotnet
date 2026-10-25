@@ -129,6 +129,13 @@ header are left alone. If you use `UseResponseCompression`, call it before
 compressed. You can switch the middleware off from settings with
 `"AutoInject": false`.
 
+To add it to some paths only, put it in a branch:
+
+```csharp
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/blog"),
+    branch => branch.UsePrivatusAnalyticsAutoInject());
+```
+
 ## Configuration
 
 Every setting is optional except the site id. You can set them in
@@ -182,7 +189,7 @@ To read a different section, pass it in:
 | `AutoInject` | `true` | Lets the middleware work. It only runs if you call `UsePrivatusAnalyticsAutoInject()` |
 | `ExtraAttributes` | `{}` | Any other `data-*` attribute |
 | `PageProps` | `null` | Code only. A function that gets the request and returns page properties (see below) |
-| `QueueStub` | `false` | Prints a small script before the tag so `privatus.track` works before the tracker loads |
+| `QueueStub` | `false` | Prints a small script before the tag so `privatus.track` works before the tracker loads. It still prints when the tag is off, so those calls never fail |
 | `Nonce` | `null` | A fixed nonce for the Content Security Policy |
 | `NonceItemKey` | `csp-nonce` | The `HttpContext.Items` key that holds the nonce for each request |
 
@@ -380,6 +387,12 @@ queued calls when it loads:
 <script>window.privatus=window.privatus||{q:[]};['track','pageview','props','optOut','optIn','ready'].forEach(function(m){window.privatus[m]=window.privatus[m]||function(){window.privatus.q.push([m,Array.prototype.slice.call(arguments)])}})</script>
 ```
 
+The queue stub prints even where the tag is off (in Development, with
+`"Enabled": false`, or with no site id). Then only the stub prints: no
+tracker and no page properties. So you can always call `privatus.track(...)`.
+In Development the calls just wait in the queue and are never sent. The
+middleware adds nothing when the tag is off.
+
 ### Naming events
 
 Pick one style and keep it. We suggest "Noun verb" in the past tense, like
@@ -398,6 +411,15 @@ The script sets no cookies and stores nothing in the browser. This package
 does not send anything from your server. See the [privacy
 documentation](https://privatusanalytics.com/docs/privacy) for what is
 collected.
+
+If you have a privacy policy, it should say which tools handle your visitors' data. You can paste this:
+
+> This website uses [Privatus Analytics](https://privatusanalytics.com/privacy-analytics) to count visits. It
+> does not use cookies and does not follow you from one website to another. Your IP address is used for a moment
+> to count visits and is never stored.
+
+Change it to fit your site. The [privacy policy generator](https://privatusanalytics.com/tools/privacy-policy-generator)
+makes a longer version with your site's name in it.
 
 ## Development
 
