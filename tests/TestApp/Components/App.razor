@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blazor</title>
+    <PrivatusAnalytics QueueStub="true" Props="@(new { plan = "team" })" />
+</head>
+<body>
+    <Router AppAssembly="typeof(App).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="routeData" />
+        </Found>
+    </Router>
+</body>
+</html>

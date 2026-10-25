@@ -1,0 +1,11 @@
+bin/
+obj/
+artifacts/
+TestResults/
+*.nupkg
+*.snupkg
+*.user
+.vs/
+.idea/
+.DS_Store
+SUBMISSION.md

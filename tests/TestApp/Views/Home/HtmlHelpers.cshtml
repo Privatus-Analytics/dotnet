@@ -1,0 +1,15 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Helpers</title>
+  @Html.PrivatusAnalytics(new PrivatusTagOverrides { Modules = new[] { "engage", "auto" }, Props = new { role = "admin" } })
+</head>
+<body>
+<button @Html.PrivatusEvent("Report exported", new { format = "csv", rows = 10 })>Export</button>
+<a href="/" @Html.PrivatusClick("nav.home")>Home</a>
+<a id="bad" href="/" @Html.PrivatusClick("no spaces")>Bad</a>
+</body>
+</html>

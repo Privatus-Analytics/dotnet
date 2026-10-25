@@ -1,0 +1,9 @@
+@section Head {
+  <privatus-analytics />
+}
+<button privatus-event="Export CSV" privatus-prop-format="csv" privatus-prop-source="toolbar">Export</button>
+<form method="post" action="/signup" privatus-event="Signup" privatus-props='new { Plan = "pro", Seats = 3 }'><input name="email"></form>
+<span id="empty" privatus-event="  ">Nothing</span>
+<a href="/pricing" privatus-click="pricing.cta">Pricing</a>
+<a id="bad" href="/x" privatus-click="bad name!">Bad</a>
+<p id="escaped" privatus-event='@("Say \"hi\"")' privatus-prop-note='@("a<b")'>Hi</p>

@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <RootNamespace>Privatus.Analytics</RootNamespace>
+    <AssemblyName>Privatus.Analytics.AspNetCore</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+
+    <PackageId>Privatus.Analytics.AspNetCore</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Two Phase LLC</Authors>
+    <Company>Two Phase LLC</Company>
+    <Product>Privatus Analytics</Product>
+    <Copyright>Copyright (c) 2026 Two Phase LLC</Copyright>
+    <Description>Adds the cookieless Privatus Analytics tracking script to ASP.NET Core apps. Tag helpers, HTML helpers, a Blazor component and an optional middleware. It only prints HTML and never sends events from your server.</Description>
+    <PackageTags>analytics;privacy;cookieless;web-analytics;aspnetcore;razor;blazor;tag-helpers</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://privatusanalytics.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Privatus-Analytics/dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>https://github.com/Privatus-Analytics/dotnet/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EnablePackageValidation>true</EnablePackageValidation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Privatus.Analytics.AspNetCore.Tests" />
+  </ItemGroup>
+
+</Project>
