@@ -1,19 +1,46 @@
 # Privatus Analytics for ASP.NET Core
 
-Adds the cookieless [Privatus Analytics](https://privatusanalytics.com)
-tracking script to your ASP.NET Core app. You can use a tag helper, an HTML
-helper, a Blazor component, or an optional middleware that puts it in the
-`<head>` for you.
+**Simple, private website analytics for your ASP.NET Core app.** No cookies,
+honest numbers, and a dashboard you understand in seconds.
 
-Privatus Analytics counts visits, sources, pages and conversions without
-cookies, local storage or fingerprinting. In many countries this means you do
-not have to ask visitors for permission before you count them. Rules differ
-from country to country, so check with a lawyer for yours.
+## Why Privatus Analytics
 
-The package only prints the browser script and some HTML attributes. It never
-sends events from your server, sets no cookies, and never reads IP addresses,
-browser details or any visitor id. You need a Privatus Analytics account to see
-reports, and there is a free plan. Sign up at https://privatusanalytics.com.
+**Google Analytics is slow, confusing and hungry for data.** It sends what your
+visitors do to Google. In many countries it means showing a cookie pop-up (the
+box that asks visitors to accept cookies), and many people click "reject", so
+you never see them. Bots pad the numbers that are left.
+
+**Privatus Analytics fixes that.** It counts visits to your ASP.NET Core app
+without cookies and never stores IP addresses. Bots are filtered out before they
+are counted. Your data is never sold or shared.
+
+What you get:
+
+- **A dashboard you understand in seconds.** Visitors, top pages and where
+  people came from, all on one screen.
+- **No cookie pop-up needed for our analytics.** We set no cookies and store no
+  personal data. Laws differ by country, so check your own legal advice.
+- **Honest numbers.** Known bots and fake traffic are left out on every plan.
+- **A fast app.** The tracking script is about 3 KB, tiny next to most tracking
+  tags.
+- **Data you own.** We never sell it or show you ads, and you can pull it out
+  any time through the API.
+
+**Start free.** The Free plan has 10,000 events a month and 3 sites, with no
+card. Every new account also gets 14 days of Pro free, with no card. [Create
+your account](https://privatusanalytics.com).
+
+## What this package does
+
+- Adds the Privatus Analytics tracking script with a tag helper, an HTML helper,
+  a Blazor component, or an optional middleware that puts it in the `<head>` for
+  you.
+- Only prints the browser script and some HTML attributes. It never sends events
+  from your server and sets no cookies.
+- Never reads IP addresses, browser details or any visitor id.
+
+You need a Privatus Analytics account to see reports, and there is a free plan.
+Sign up at https://privatusanalytics.com.
 
 ## Requirements
 
@@ -123,7 +150,7 @@ app.UsePrivatusAnalyticsAutoInject();
 It adds the tag just before `</head>` in UTF-8 `text/html` responses with
 status 200. It skips Ajax requests (requests sent by your own page's
 JavaScript with the `X-Requested-With` header), pages without a `<head>`, and
-pages that already have the tag. Responses that carry a `Content-Encoding`
+pages that already have the tag. Responses that have a `Content-Encoding`
 header are left alone. If you use `UseResponseCompression`, call it before
 `UsePrivatusAnalyticsAutoInject`, so the tag is added before the page is
 compressed. You can switch the middleware off from settings with
@@ -364,7 +391,7 @@ The same name rules apply. Numbers and `true` or `false` stay as they are,
 and lists stay lists (up to 30 items).
 
 **Never put names, email addresses, user ids or anything else that points to
-one person in properties.** Privatus counts visitors without any id. Put
+one person in properties.** Privatus Analytics counts visitors without any id. Put
 groups (plan, role, team size) in properties, not people. The server also
 removes email addresses and long ids it finds.
 
