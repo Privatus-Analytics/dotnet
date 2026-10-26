@@ -1,13 +1,5 @@
 # Changelog
 
-## Unreleased
-
-- Changed: with `QueueStub` on, a tag that is off (Development, `"Enabled": false` or no site id) now prints
-  the queue stub and nothing else, so `privatus.track(...)` calls in your own JavaScript never fail. Before, it
-  printed nothing. With `QueueStub` off it still prints nothing. The `PageProps` function is not called when
-  the tag is off, and the middleware still adds nothing.
-- Added `example/`, a small Razor Pages app for the conformance tests.
-
 ## 1.0.0 - 2026-10-25
 
 - Initial release.
@@ -18,3 +10,8 @@
 - Content Security Policy nonce from `HttpContext.Items["csp-nonce"]` (the key can be changed) or a setting.
 - Optional middleware, `app.UsePrivatusAnalyticsAutoInject()`, that adds the tag to the head of HTML responses.
 - Skips every environment except Production by default.
+- Changed: with `QueueStub` on, a tag that is off (Development, `"Enabled": false` or no site id) now prints
+  the queue stub and nothing else, so `privatus.track(...)` calls in your own JavaScript never fail. Before, it
+  printed nothing. With `QueueStub` off it still prints nothing. The `PageProps` function is not called when
+  the tag is off, and the middleware still adds nothing.
+- Added `example/`, a small Razor Pages app for the conformance tests.
